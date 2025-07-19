@@ -29,7 +29,7 @@ public class PostApiClient {//Clase que se encarga de hacer las peticiones a la 
 
     public Post fetchPostById(Long id){
         return webClient.get()
-                .uri("/posts/{id}")
+                .uri(uriBuilder -> uriBuilder.path("/posts/{id}").build(id)) // Especifica la URI con el ID del post solo cuando desea obtener un post específico
                 .retrieve()
                 .bodyToMono(Post.class) // Convierte la respuesta en un Mono de Post
                 .block(); // Bloquea hasta que se complete la solicitud y devuelve el Post
